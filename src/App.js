@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {movieData} from './components/movieData'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+let title = "Hello, World!"
+
+//UI = function(state)
+class App extends React.Component {
+  
+  constructor() {
+    super();
+    this.state = {
+      movies: movieData
+    }
+  }
+
+  render() {
+
+    const listOfMovies = this.state.movies.map((movie) => {
+      return <p>{movie.title}</p>
+    });
+
+    console.log(this);
+    return (
+      <div className="App">
+        {/* <h1>{[<p>1</p>, <p>2</p>]}</h1> */}
+        <h1>{listOfMovies}</h1>
+        <h1>{this.state.movies[0].title}</h1>
+      </div>
+    );
+  }
 }
 
 export default App;
