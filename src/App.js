@@ -2,15 +2,16 @@ import React from 'react';
 import './App.css';
 import { movieData } from './components/movieData';
 import MovieItem from './components/movieItem';
-
+import 'bootstrap/dist/css/bootstrap.css';
 //let title = 'Hello, World!';
 
-//UI = function(state)
+//UI = function(state, props)
 class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            movies: movieData
+            movies: movieData,
+            moviesWillWatch: []
         };
     }
 
@@ -36,24 +37,39 @@ class App extends React.Component {
         this.setState({ movies: newMoviesList });
     };
 
-    render() {
-        const listOfMovies = this.state.movies.map(movie => {
-            return (
-                <MovieItem
-                    key={movie.id}
-                    movie={movie}
-                    movies={this.state.movies}
-                    removeMovie={this.removeMovie}
-                />
-            );
-        });
+    addMovieToWillWatch = movie => {
+        console.log(movie); 
+        // console.log("addMovieToWillWatchFunc called")
+        const movieList = [...this.state.moviesWillWatch, movie];
+        this.setState({moviesWillWatch: movieList})
 
+    }
+
+    render() {
         console.log(this);
         return (
-            <div className="App">
-                {/* <h1>{[<p>1</p>, <p>2</p>]}</h1> */}
-                <h1>{listOfMovies}</h1>
-                <h1>{this.state.movies[0].title}</h1>
+            <div className="container">
+                <div className="row">
+                    <div className="col-9">
+                        <div className="row">
+                            {this.state.movies.map(movie => {
+                                return (
+                                    <div className="col-6 mb-4" key={movie.id}>
+                                        <MovieItem
+                                            movie={movie}
+                                            // movies={this.state.movies}
+                                            removeMovie={this.removeMovie}
+                                            addMovieToWillWatch={this.addMovieToWillWatch}
+                                        />
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                    <div className="col-3">
+                        <p>Will watch {this.state.moviesWillWatch.length}</p>
+                    </div>
+                </div>
             </div>
         );
     }
