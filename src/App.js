@@ -21,6 +21,21 @@ class App extends React.Component {
 
     componentDidMount() {
         console.log('Did mount');
+        this.getMovies();
+        console.log('after fetch');
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        console.log("did update");
+        console.log('prev', prevProps, prevState);
+        console.log('this', this.props, this.state);
+        if(prevState.sort_by !== this.state.sort_by) {
+            console.log('call api');
+            this.getMovies();
+        }
+    }
+
+    getMovies = () => {
         fetch(
             `http://api.themoviedb.org/3/discover/movie?api_key=3f4ca4f3a9750da53450646ced312397&sort_by=${this.state.sort_by}`
         )
@@ -33,7 +48,6 @@ class App extends React.Component {
                 console.log('data: ', data);
                 this.setState({ movies: data.results });
             });
-        console.log('after fetch');
     }
 
     //callback
@@ -83,7 +97,7 @@ class App extends React.Component {
 
     render() {
         // console.log(this);
-        console.log('render');
+        console.log('render', this.state.sort_by);
         return (
             <div className="container">
                 <div className="row">
