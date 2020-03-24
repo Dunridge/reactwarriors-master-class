@@ -129,9 +129,7 @@ class App extends React.Component {
                             </div>
                         </div>
                         <div className="row">
-                            {//TODO: set a filtering method for the movies array that will return
-                            //another array that you'll map
-                            this.state.movies
+                            {this.state.movies
                                 .filter(movie => {
                                     if (this.state.current_page === 1) {
                                         if (
@@ -142,11 +140,22 @@ class App extends React.Component {
                                             return true;
                                         }
                                     } else if (this.state.current_page === 2) {
-                                        if(this.state.movies.slice(6, 11).includes(movie)) {
+                                        if (
+                                            this.state.movies
+                                                .slice(6, 11)
+                                                .includes(movie)
+                                        ) {
                                             return true;
                                         }
                                     } else if (this.state.current_page === 3) {
-                                        if(this.state.movies.slice(12, this.state.movies.length).includes(movie)) {
+                                        if (
+                                            this.state.movies
+                                                .slice(
+                                                    12,
+                                                    this.state.movies.length
+                                                )
+                                                .includes(movie)
+                                        ) {
                                             return true;
                                         }
                                     }
