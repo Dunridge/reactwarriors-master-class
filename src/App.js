@@ -39,7 +39,7 @@ class App extends React.Component {
 
     getMovies = () => {
         fetch(
-            `http://api.themoviedb.org/3/discover/movie?api_key=3f4ca4f3a9750da53450646ced312397&sort_by=${this.state.sort_by}`
+            `https://api.themoviedb.org/3/discover/movie?api_key=3f4ca4f3a9750da53450646ced312397&sort_by=${this.state.sort_by}`
         )
             .then(response => {
                 //&sort_by=popularity.desc
