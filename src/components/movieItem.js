@@ -21,7 +21,7 @@ class MovieItem extends Component {
                     src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path ||
                         movie.poster_path}`}
                     alt=""
-                    className="card-img-top"
+                    className="card-img-top responsive-img"
                 />
                 <div className="card-body">
                     <h6 className="card-title">{movie.title}</h6>
@@ -34,7 +34,7 @@ class MovieItem extends Component {
                                 })
                                 removeMovieFromWillWatch(movie);
                             }}>
-                                Remove will watch
+                                Remove
                             </button>
                         ) : (
                             <button
@@ -47,7 +47,7 @@ class MovieItem extends Component {
                                     addMovieToWillWatch(movie);
                                 }}
                             >
-                                Add will watch
+                                Add
                             </button>
                         )}
                     </div>

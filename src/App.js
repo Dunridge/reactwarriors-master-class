@@ -7,6 +7,11 @@ import { movieData } from './components/movieData';
 import MovieTabs from './components/MovieTabs';
 //let title = 'Hello, World!';
 import Pagination from './components/Pagination';
+import Navbar from './components/Navbar';
+import Info from './components/Info';
+import $ from 'jquery';
+import Footer from './components/Footer';
+// import UIHelper from './helpers/UIHelper'; //failed to implement
 
 //UI = function(state, props)
 class App extends React.Component {
@@ -25,6 +30,13 @@ class App extends React.Component {
         console.log('Did mount');
         this.getMovies();
         console.log('after fetch');
+        // $(document).ready(() => {
+        //     // $('.materialboxed').materialbox();
+        //     // materialbox();
+        //     // this.state.context.materialbox(); //it might not work because you import materialbox in the index file
+        //     // console.log('this.state.context: ', this.state.context);
+        //     console.log("hi from jQuery")
+        // })
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -111,84 +123,100 @@ class App extends React.Component {
         // console.log(this);
         console.log('render', this.state.sort_by);
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-9">
-                        <div className="row mb-4">
-                            <div className="col-12">
-                                <MovieTabs
-                                    sort_by={this.state.sort_by}
-                                    updateSortBy={this.updateSortBy}
-                                />
+            <div>
+                <div className="container">
+                    <Navbar
+                        moviesWillWatch={this.state.moviesWillWatch.length}
+                    />
+                    <Info />
+                </div>
 
-                                <Pagination
-                                    postsPerPage={6}
-                                    totalPosts={this.state.movies.length}
-                                    paginate={this.paginate}
-                                />
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="row mb-4">
+                                <div className="col-12">
+                                    <MovieTabs
+                                        sort_by={this.state.sort_by}
+                                        updateSortBy={this.updateSortBy}
+                                    />
+                                </div>
                             </div>
-                        </div>
-                        <div className="row">
-                            {this.state.movies
-                                .filter(movie => {
-                                    if (this.state.current_page === 1) {
-                                        if (
-                                            this.state.movies
-                                                .slice(0, 5)
-                                                .includes(movie)
-                                        ) {
-                                            return true;
-                                        }
-                                    } else if (this.state.current_page === 2) {
-                                        if (
-                                            this.state.movies
-                                                .slice(6, 11)
-                                                .includes(movie)
-                                        ) {
-                                            return true;
-                                        }
-                                    } else if (this.state.current_page === 3) {
-                                        if (
-                                            this.state.movies
-                                                .slice(
-                                                    12,
-                                                    this.state.movies.length
-                                                )
-                                                .includes(movie)
-                                        ) {
-                                            return true;
-                                        }
-                                    }
-                                })
-                                .map(movie => {
-                                    //TODO: ouput the number of pages depending on the number of current page
+                            <div className="row">
+                                <div className="col s12 l12">
+                                    {this.state.movies
+                                        .filter(movie => {
+                                            if (this.state.current_page === 1) {
+                                                if (
+                                                    this.state.movies
+                                                        .slice(0, 5)
+                                                        .includes(movie)
+                                                ) {
+                                                    return true;
+                                                }
+                                            } else if (
+                                                this.state.current_page === 2
+                                            ) {
+                                                if (
+                                                    this.state.movies
+                                                        .slice(6, 11)
+                                                        .includes(movie)
+                                                ) {
+                                                    return true;
+                                                }
+                                            } else if (
+                                                this.state.current_page === 3
+                                            ) {
+                                                if (
+                                                    this.state.movies
+                                                        .slice(
+                                                            12,
+                                                            this.state.movies
+                                                                .length
+                                                        )
+                                                        .includes(movie)
+                                                ) {
+                                                    return true;
+                                                }
+                                            }
+                                        })
+                                        .map(movie => {
+                                            //TODO: ouput the number of pages depending on the number of current page
 
-                                    return (
-                                        <div
-                                            className="col-6 mb-4"
-                                            key={movie.id}
-                                        >
-                                            <MovieItem
-                                                movie={movie}
-                                                // movies={this.state.movies}
-                                                removeMovie={this.removeMovie}
-                                                addMovieToWillWatch={
-                                                    this.addMovieToWillWatch
-                                                }
-                                                removeMovieFromWillWatch={
-                                                    this
-                                                        .removeMovieFromWillWatch
-                                                }
-                                            />
-                                        </div>
-                                    );
-                                })}
+                                            return (
+                                                <div
+                                                    className="col-6 mb-4"
+                                                    key={movie.id}
+                                                >
+                                                    <MovieItem
+                                                        movie={movie}
+                                                        // movies={this.state.movies}
+                                                        removeMovie={
+                                                            this.removeMovie
+                                                        }
+                                                        addMovieToWillWatch={
+                                                            this
+                                                                .addMovieToWillWatch
+                                                        }
+                                                        removeMovieFromWillWatch={
+                                                            this
+                                                                .removeMovieFromWillWatch
+                                                        }
+                                                    />
+                                                </div>
+                                            );
+                                        })}
+                                </div>
+                            </div>
+                            <Pagination
+                                postsPerPage={6}
+                                totalPosts={this.state.movies.length}
+                                paginate={this.paginate}
+                            />
                         </div>
-                    </div>
-                    <div className="col-3">
-                        <p>Will watch {this.state.moviesWillWatch.length}</p>
                     </div>
                 </div>
+                <Footer />
             </div>
         );
     }

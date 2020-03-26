@@ -7,10 +7,12 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1",
     "node-sass": "4.13.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
-    "react-scripts": "3.4.0"
+    "react-scripts": "3.4.0",
+    "react-scroll-parallax": "^2.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -38,5 +40,5 @@
   "devDependencies": {
     "gh-pages": "^2.2.0"
   },
-  "homepage": "http://Dunridge.github.io/reactwarriors-master-class"
+  "homepage": "http://Dunridge.github.io/movie-picker"
 }
